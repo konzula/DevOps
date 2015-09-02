@@ -27,7 +27,7 @@ Ohai.plugin(:PackageInfo) do
       when 'arch'
         pckg_list = eval '{'+`package-query -Q -f '"%n"=> { "version"=> "%v", }, '`+'}'
       when 'gentoo'
-        pckg_list = eval '{'+`equery list --format='$name => { "version"=> $version, }, ' '*'`+'}'
+        pckg_list = eval '{'+`equery list --format='"$name" => { "version"=> "$version", }, ' '*'`+'}'
       end                                                                                                    
       package Mash.new pckg_list
     end                                                                                                                   
