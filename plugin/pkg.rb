@@ -23,7 +23,7 @@ Ohai.plugin(:PackageInfo) do
       when 'debian'
         pckg_list = eval '{'+`dpkg-query -W -f='"${Package}"=> { "version" => "${Version}" }, '`+'}'
       when 'rhel' || 'fedora'
-        pckg_list = eval '{'+`rpm -qa --queryformat '"%{NAME}"=> "%{VERSION}", '`+'}'
+        pckg_list = eval '{'+`rpm -qa --queryformat '"%{NAME}"=> \\{ "version"=> "%{VERSION}", \\}, '`+'}'
       when 'arch'
         pckg_list = eval '{'+`package-query -Q -f '"%n"=> "%v", '`+'}'
       when 'gentoo'
