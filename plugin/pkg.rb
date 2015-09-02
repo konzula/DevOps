@@ -25,9 +25,9 @@ Ohai.plugin(:PackageInfo) do
       when 'rhel' || 'fedora'
         pckg_list = eval '{'+`rpm -qa --queryformat '"%{NAME}"=> \\{ "version"=> "%{VERSION}", \\}, '`+'}'
       when 'arch'
-        pckg_list = eval '{'+`package-query -Q -f '"%n"=> "%v", '`+'}'
+        pckg_list = eval '{'+`package-query -Q -f '"%n"=> { "version"=> "%v", }, '`+'}'
       when 'gentoo'
-        pckg_list = eval '{'+`equery list --format='$name => $version, ' '*'`+'}'
+        pckg_list = eval '{'+`equery list --format='$name => { "version"=> $version, }, ' '*'`+'}'
       end                                                                                                    
       package Mash.new pckg_list
     end                                                                                                                   
